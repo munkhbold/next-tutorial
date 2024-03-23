@@ -1,20 +1,34 @@
+import { fetchFilteredInvoices } from '@/app/lib/data';
+import { AntTable } from '@/app/ui/invoices/antTable';
+import { Table } from 'antd';
 import Image from 'next/image';
+import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { fetchFilteredInvoices } from '@/app/lib/data';
+
 
 export default async function InvoicesTable({
   query,
   currentPage,
+  totalPages,
 }: {
   query: string;
   currentPage: number;
+  totalPages: number;
 }) {
+  
   const invoices = await fetchFilteredInvoices(query, currentPage);
-
+  console.log({totalPages})
+  const pagination = {
+    current: currentPage,
+    pageSize: 6,
+    total: totalPages * 6 
+  }
   return (
     <div className="mt-6 flow-root">
+      <AntTable invoices={invoices}  />
+    
+    {/* <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
@@ -119,6 +133,7 @@ export default async function InvoicesTable({
           </table>
         </div>
       </div>
+              </div> */}
     </div>
   );
 }

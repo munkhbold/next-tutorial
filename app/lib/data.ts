@@ -1,3 +1,5 @@
+// "use server";
+
 // import { unstable_noStore as noStore } from 'next/cache';
 import { sql } from '@vercel/postgres';
 import {
@@ -95,6 +97,7 @@ export async function fetchFilteredInvoices(
     const invoices = await sql<InvoicesTable>`
       SELECT
         invoices.id,
+        invoices.id as key,
         invoices.amount,
         invoices.date,
         invoices.status,
@@ -134,8 +137,8 @@ export async function fetchInvoicesPages(query: string) {
       invoices.status ILIKE ${`%${query}%`}
   `;
 
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
-    return totalPages;
+    // const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return Number(count.rows[0].count);
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of invoices.');

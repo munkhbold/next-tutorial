@@ -1,5 +1,8 @@
-import Form from '@/app/ui/invoices/create-form';
-import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
+// import Form from '@/app/ui/invoices/create-form';
+import Form from '@/app/ui/invoices/ant-create-form';
+// import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
+// import Breadcrumbs from '@/app/ui/invoices/antBreadcrumbs';
+import { Breadcrumb } from 'antd';
 import { fetchCustomers } from '@/app/lib/data';
  
 export default async function Page() {
@@ -7,13 +10,15 @@ export default async function Page() {
  
   return (
     <main>
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Invoices', href: '/dashboard/invoices' },
+      <Breadcrumb
+        items={[
+          { 
+            title: 'Invoices',
+            href: '/dashboard/invoices',
+          },
           {
-            label: 'Create Invoice',
+            title: 'Create Invoice',
             href: '/dashboard/invoices/create',
-            active: true,
           },
         ]}
       />
