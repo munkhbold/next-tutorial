@@ -82,8 +82,6 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
             style={{ width: '100%' }}
             formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
-            // formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            // parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
             placeholder="Enter USD amount"
           />
         </Formd.Item>
@@ -99,11 +97,9 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
           <Flex gap="middle" wrap="wrap" justify="end">
             <Link
               href="/dashboard/invoices"
-              className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-            >
+              className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200">
               Cancel
             </Link>
-
             <Button 
               htmlType="submit"
               type="primary"
