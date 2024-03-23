@@ -2,15 +2,17 @@
 import Form from '@/app/ui/invoices/ant-create-form';
 // import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 // import Breadcrumbs from '@/app/ui/invoices/antBreadcrumbs';
+import { clsx } from 'clsx';
 import { Breadcrumb } from 'antd';
 import { fetchCustomers } from '@/app/lib/data';
+import { lusitana } from '@/app/ui/fonts';
  
 export default async function Page() {
   const customers = await fetchCustomers();
  
   return (
     <main>
-      <Breadcrumb
+      <Breadcrumb className={clsx(lusitana.className, 'flex text-xl md:text-2xl')}
         items={[
           { 
             title: 'Invoices',
@@ -18,7 +20,7 @@ export default async function Page() {
           },
           {
             title: 'Create Invoice',
-            href: '/dashboard/invoices/create',
+            href: '/dashboard/invoices/create'
           },
         ]}
       />

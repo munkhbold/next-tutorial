@@ -32,10 +32,11 @@ export type State = {
 
 export async function createInvoice(prevState: State, formData: FormData) {
     const validatedFields = CreateInvoice.safeParse({
-        customerId: formData.get('customerId'),
-        amount: formData.get('amount'),
-        status: formData.get('status'),
+        customerId: formData?.customerId,
+        amount: formData?.amount,
+        status: formData?.status
     });
+
 
     if (!validatedFields.success) {
       return {
@@ -45,6 +46,12 @@ export async function createInvoice(prevState: State, formData: FormData) {
     }
 
     const { customerId, amount, status } = validatedFields.data;
+    if (status === 'paid') {
+      return {
+        errors: [{ customerId: ['Provide a valid customer ID']}],
+        message: 'System Error: Please try again later!',
+      };
+    }
     const amountInCents = amount * 100;
     const date = new Date().toISOString().split('T')[0];
 

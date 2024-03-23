@@ -6,13 +6,13 @@ import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 
-const Columns = [
+const Columns: any = [
 {
     title: 'Customer',
     dataIndex: 'name',
     key: '1',
     responsive: ['lg'],
-    render: function(_, record: any) {
+    render: function(_: any, record: any) {
         return (
             <div className="flex items-center gap-3">
             <Image
